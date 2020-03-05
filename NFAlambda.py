@@ -13,16 +13,20 @@ while st!="":
     st=f.readline()
 print(l)
 def evalueaza(sc,cuv,sol):
+    aux2 = sol
+    aux = set()
+    while aux2!=aux:
+        aux=aux2
+        for x in aux:
+            if 'la' in l[x]:
+                aux2 = aux.union(l[x]['la'])
     if cuv=="":
         return fin.intersection(sol)!=set()
     else:
-        aux = set()
         for x in sol:
             if cuv[0] in l[x]:
                 aux=aux.union(l[x][cuv[0]])
-            if 'la' in l[x]:
-                aux = aux.union(l[x]['la'])
         return evalueaza(sc,cuv[1:],aux)
 a = set()
 a.add(q0)
-print(evalueaza(0,'bbbb',a))
+print(evalueaza(0,'bbbab',a))
