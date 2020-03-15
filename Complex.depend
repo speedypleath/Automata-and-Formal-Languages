@@ -1,8 +1,0 @@
-# depslib dependency file v1.0
-1583272981 source:d:\poo\complex\complex.cpp
-	"Complex.h"
-	<bits/stdc++.h>
-
-1583272981 d:\poo\complex\complex.h
-	<string>
-
