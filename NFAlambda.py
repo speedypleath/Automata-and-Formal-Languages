@@ -12,21 +12,22 @@ while st!="":
     l[int(a)][b].add(int(c))
     st=f.readline()
 print(l)
-def evalueaza(sc,cuv,sol):
-    aux2 = sol
-    aux = set()
-    while aux2!=aux:
-        aux=aux2
-        for x in aux:
+def evalueaza(cuv,states):
+    new_states = states
+    old_states = set()
+    while old_states!=new_states:
+        old_states=new_states
+        for x in old_states:
             if 'la' in l[x]:
-                aux2 = aux.union(l[x]['la'])
+                new_states = new_states.union(l[x]['la'])
     if cuv=="":
-        return fin.intersection(sol)!=set()
+        return fin.intersection(new_states)!=set()
     else:
-        for x in sol:
+        aux = set()
+        for x in new_states:
             if cuv[0] in l[x]:
                 aux=aux.union(l[x][cuv[0]])
-        return evalueaza(sc,cuv[1:],aux)
+        return evalueaza(cuv[1:],aux)
 a = set()
 a.add(q0)
-print(evalueaza(0,'bbbab',a))
+print(evalueaza('abyyxyx',a))
