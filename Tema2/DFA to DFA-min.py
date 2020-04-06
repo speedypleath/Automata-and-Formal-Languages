@@ -59,7 +59,7 @@ for i in range(m):
     if fin.intersection(new[i]):
         new_fin.add(i)
 coada = queue.Queue(m)
-for x in range(m):   #eliminarea starilor dead-end
+for x in range(m):   #pasul 4-eliminarea starilor dead-end
     coada.put(x)
     viz = [False] * m
     viz[x] = True
@@ -75,11 +75,14 @@ for x in range(m):   #eliminarea starilor dead-end
                         viz[dfa_min[i][j]] = True
             else:
                 dfa_min = dfa_min[:i] + dfa_min[i + 1:]
-                delete = {}
-                for k1 in dfa_min:
-                    for k2 in k1:
-                        if k1[k2] == i:
-                            k1[k2] = None
+                k = i
+                for i in range(len(dfa_min)):
+                    for j in char:
+                        if j in dfa_min[i] and dfa_min[i][j]==k:
+                            dfa_min[i].pop(j)
+                        if j in dfa_min[i] and dfa_min[i][j] > k:
+                            dfa_min[i][j] -= 1
+
 coada = queue.Queue(m)
 coada.put(q0)
 viz = [False]*m
@@ -94,3 +97,8 @@ while not coada.empty():  #pasul 5-eliminarea starilor neaccesibile
 for i in range(m):
     if not viz[i]:
         dfa_min = dfa_min[:i] + dfa_min[i + 1:]
+        for x in range(len(dfa_min)):
+            for y in char:
+                if y in dfa_min[x] and dfa_min[x][y] and dfa_min[x][y]>i:
+                    dfa_min[x][y] -= 1
+print(dfa_min)
