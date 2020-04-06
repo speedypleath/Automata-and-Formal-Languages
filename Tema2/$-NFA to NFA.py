@@ -12,6 +12,7 @@ while st!="":
         l[int(a)][b]=set()
     l[int(a)][b].add(int(c))
     st=f.readline()
+
 c=queue.Queue(n)
 inchidere=[{x} for x in range(n)]
 for i in range(n):  #pasul 1-lambda inchidere
@@ -63,6 +64,25 @@ k=0
 for i in id:
     for j in id[i]:
         nfa.remove(nfa[j-k])
+        n-=1
         k+=1
-print(new_fin)
+for i in range(n):
+    for j in char:
+        aux = set()
+        for x in nfa[i][j]:
+            x1 = x
+            for a in id:
+                for b in id[a]:
+                    if x>b:
+                        x1 -= 1
+            aux.add(x1)
+        nfa[i][j]=aux
+fin = set()
+for i in new_fin:
+    x = i
+    for a in id:
+        for b in id[a]:
+            if i > b:
+                x -= 1
+    fin.add(x)
 print(nfa)
