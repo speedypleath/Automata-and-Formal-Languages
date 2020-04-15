@@ -88,7 +88,7 @@ def lambdatonfa(n,char,q0,fin,l):
         fin.add(x)
 
 
-    return  nfa, fin, n
+    return  n,char,q0,fin,nfa
 
 def nfatodfa(n,char,q0,fin,l):
     c=queue.Queue()
@@ -121,7 +121,7 @@ def nfatodfa(n,char,q0,fin,l):
                 aux = aux.union(l[k][x])
             if aux!=set():
                 dfa[i][x]=viz.index(tuple(aux))
-    return dfa,new_fin,len(dfa)
+    return  len(dfa),char,q0,fin,dfa
 
 def dfatomin(n,char,q0,fin,l):
     adiacenta = [[True] * x for x in range(n)]
@@ -214,5 +214,11 @@ def dfatomin(n,char,q0,fin,l):
                 for y in char:
                     if y in dfa_min[x] and dfa_min[x][y] and dfa_min[x][y] > i:
                         dfa_min[x][y] -= 1
-    return dfa_min, new_fin, len(dfa_min)
+    return len(dfa_min), char, q0, new_fin, dfa_min
 
+n,char,q0,fin,l = lambdatonfa(n,char,q0,fin,l)
+print(n,char,q0,fin,l)
+n,char,q0,fin,l = nfatodfa(n,char,q0,fin,l)
+print(n,char,q0,fin,l)
+n,char,q0,fin,l = dfatomin(n,char,q0,fin,l)
+print(n,char,q0,fin,l)
